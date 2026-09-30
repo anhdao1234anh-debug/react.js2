@@ -1,0 +1,51 @@
+{
+  "name": "fullstack-source-base",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Source base fullstack tái sử dụng: Express (ESM) + MongoDB + React (Vite) + TanStack Query + Tailwind CSS",
+  "type": "module",
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
+  "engines": {
+    "node": ">=22.12.0",
+    "npm": ">=10"
+  },
+  "scripts": {
+    "setup": "node scripts/setup.js",
+    "dev": "npm run env:check && concurrently -k -n BE,FE -c blue,magenta \"npm:dev:be\" \"npm:dev:fe\"",
+    "dev:be": "npm run dev -w backend",
+    "dev:fe": "npm run dev -w frontend",
+    "build": "npm run build -w frontend",
+    "start": "npm run start -w backend",
+    "preview": "npm run preview -w frontend",
+    "seed": "npm run seed -w backend",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "npm run test:scripts && npm run test -w backend && npm run test -w frontend",
+    "test:be": "npm run test -w backend",
+    "test:fe": "npm run test -w frontend",
+    "test:scripts": "vitest run --config scripts/vitest.config.js",
+    "test:coverage": "npm run test:coverage -w backend && npm run test:coverage -w frontend",
+    "env:check": "node scripts/env.js check",
+    "env:sync": "node scripts/env.js sync",
+    "check": "npm run env:check && npm run lint && npm run format:check && npm run test",
+    "clean": "node scripts/clean.js"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@vitest/eslint-plugin": "^1.6.27",
+    "concurrently": "^10.0.5",
+    "eslint": "^10.11.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.7",
+    "globals": "^17.12.0",
+    "prettier": "^3.9.9",
+    "prettier-plugin-tailwindcss": "^0.8.1",
+    "vitest": "^5.0.2"
+  }
+}
